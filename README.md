@@ -23,20 +23,20 @@ Begin by [forking this repo](https://docs.github.com/en/free-pro-team@latest/git
 <summary>Enable Code Scanning</summary>
 <p> 
 
-#### Security tab
+### Security tab
 
 Click on the `Security` tab.
 
 
 <img src="images/00-repo-security-tab.png" width="80%"/>
 
-#### Set up code scanning
+### Set up code scanning
 
 Click `Set up code scanning`.
 
 <img src="images/01-repo-secruity-setup-code-scanning.png" width="80%"/>
 
-#### Setup Workflow
+### Setup Workflow
 
 Click the `Set up this workflow` button by CodeQL Analysis.
 
@@ -53,7 +53,7 @@ See the [documentation](https://docs.github.com/en/free-pro-team@latest/github/f
 <summary>Actions Workflow file</summary>
 <p>
 
-#### Actions Workflow
+### Actions Workflow
 
 The Actions Workflow file contains a number of different steps including:
 1. Checking out the repository
@@ -75,7 +75,7 @@ Click `Start Commit` -> `Commit new file` to commit the changes to _main_ branch
 <summary>Workflow triggers</summary>
 <p>
 
-#### Workflow triggers
+### Workflow triggers
 
 There are a [number of events](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) that can trigger a GitHub Actions workflow. In this example, the workflow will be triggered on
 
@@ -96,7 +96,7 @@ Setting up the new CodeQL workflow and committing it to _main_ branch in the ste
 
 <p>
  
-#### GitHub Actions Progress
+### GitHub Actions Progress
 
 Click `Actions` tab -> `CodeQL`
 
@@ -116,7 +116,7 @@ Once the Workflow has completed, click the `Security` tab -> `Code scanning aler
 <img src="images/06-security-code-scanning-alerts.png" width="80%"/>
 
 
-#### Security Alert View
+### Security Alert View
 
 Clicking on a security alert will provide details about the security alert including: <br/>
 <ul>
@@ -127,13 +127,13 @@ Clicking on a security alert will provide details about the security alert inclu
 </ul>
 <img src="images/06-security-codeql-alert.png" width="80%"/>
 
-#### Security Alert Description
+### Security Alert Description
 
 Click `Show more` to view a full desciption of the alert including examples and links to additional information.
 
 <img src="images/07-security-codeql-show-more.png" width="80%"/>
 
-#### Security Full Description
+### Security Full Description
 
 <img width="80%" src="images/08-security-codeql-full-desc.png">
 
@@ -144,7 +144,7 @@ Click `Show more` to view a full desciption of the alert including examples and 
 <summary>Show Paths</summary>
 <p>
 
-#### Show Paths Button
+### Show Paths Button
 
 CodeQL Analysis is able to trace the dataflow path from source to sink and gives you the ability to view the path traversal within the alert.
 
@@ -152,7 +152,7 @@ Click `Show paths` to see the dataflow path that resulted in this alert.
 
 <img src="images/09-security-codeql-show-paths.png" width="80%"/>
 
-#### Show Paths View
+### Show Paths View
 
 <img src="images/10-security-codeql-show-paths-details.png" width="80%"/>
 
@@ -174,19 +174,19 @@ Within `models.go`, the lines `38`, `57`, and `76` contain the SQL injections.  
 
 Click `Create a new branch for this commit and start a pull request`, name the branch `fix-sql-injection`, and create the Pull Request.
 
-#### Pull Request Status Check
+### Pull Request Status Check
 
 In the Pull Request, you will notice that the CodeQL Analysis has started as a status check. Wait until it completes.
 
 <img src="images/12-fix-pr-in-progress.png" width="80%"/>
 
-#### Security Alert Details
+### Security Alert Details
 
 After the Workflow has completed click on `Details` by the `Code Scanning Results / CodeQL` status check. 
 
 <img src="images/13-fix-pr-done.png" width="80%"/>
 
-#### Fixed Alert
+### Fixed Alert
 
 Notice that Code Scanning has detected that this Pull Request will fix the SQL injection vulnerabilities which were detected before.
 
@@ -194,13 +194,13 @@ Notice that Code Scanning has detected that this Pull Request will fix the SQL i
 
 Merge the Pull Request. After the Pull Request has been merged, another Workflow will kick off to scan the repository for any vulnerabilties. 
 
-#### Closed Security Alerts
+### Closed Security Alerts
 
 After the final Workflow has completed, navigate back to the `Security` tab and click `Closed`. Notice that the **Query built from user-controlled sources** security alert now shows up as a closed issue.
 
 <img src="images/15-fixed-alert.png" width="80%"/>
 
-#### Traceability
+### Traceability
 
 Click on the security alert and notice that it details when the fix was made, by whom, and the specific commit. This provides full traceability to detail when and how a security alert was fixed and exactly what was changed to remediate the issue.
 
