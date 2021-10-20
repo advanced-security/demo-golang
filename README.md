@@ -10,7 +10,6 @@ You can use code scanning with CodeQL, a semantic code analysis engine. CodeQL t
 
 This tutorial with use CodeQL Analysis with Code Scanning in order to search for vulnerabilities within your code. 
 
-<!--- TODO: Update this section with Go specific instructions
 ## Instructions
 <details>
 <summary>Fork this repo</summary>
@@ -24,26 +23,28 @@ Begin by [forking this repo](https://docs.github.com/en/free-pro-team@latest/git
 <summary>Enable Code Scanning</summary>
 <p> 
 
-#### Security tab
+### Security tab
 
 Click on the `Security` tab.
 
 
-<img src="images/00-repo-security-tab.png" width="70%"/>
+<img src="images/00-repo-security-tab.png" width="80%"/>
 
-#### Set up code scanning
+### Set up code scanning
 
 Click `Set up code scanning`.
 
-<img src="images/01-repo-secruity-setup-code-scanning.png" width="70%"/>
+<img src="images/01-repo-secruity-setup-code-scanning.png" width="80%"/>
 
-#### Setup Workflow
+### Setup Workflow
 
-Click the `Setup this workflow` button by CodeQL Analysis.
+Click the `Set up this workflow` button by CodeQL Analysis.
 
-<img src="images/02-repo-security-setup-codeql-workflow.png" width="70%"/>
+<img src="images/02-repo-security-setup-codeql-workflow.png" width="80%"/>
 
-This will create a GitHub Actions Workflow file with CodeQL already set up. Since Python is an interpreted language you do not need to add any additional compile flags. See the [documentation](https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/running-codeql-code-scanning-in-your-ci-system) if you would like to configure CodeQL Analysis with a 3rd party CI system instead of using GitHub Actions.
+This will create a GitHub Actions Workflow file with CodeQL already set up. Go is a compiled language, so the `autobuild` step is automatically added to your Workflow file. Additional build configurations are documented in [Configuring the CodeQL workflow for compiled languages](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-the-codeql-workflow-for-compiled-languages) documentation. 
+
+See the [documentation](https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/running-codeql-code-scanning-in-your-ci-system) if you would like to configure CodeQL Analysis with a 3rd party CI system instead of using GitHub Actions.
 </p>
 </details>
 
@@ -52,16 +53,20 @@ This will create a GitHub Actions Workflow file with CodeQL already set up. Sinc
 <summary>Actions Workflow file</summary>
 <p>
 
-#### Actions Workflow
+### Actions Workflow
 
-The Actions Workflow file contains a number of different sections including:
+The Actions Workflow file contains a number of different steps including:
 1. Checking out the repository
 2. Initializing the CodeQL Action
-3. Running the CodeQL Analysis
+3. Building your project
+4. Running the CodeQL Analysis
 
 <img src="images/03-actions-sample-workflow.png" width="80%"/>
 
-Click `Start Commit` -> `Commit this file` to commit the changes to _main_ branch.
+Click `Start Commit` -> `Commit new file` to commit the changes to _main_ branch.
+
+<img src="images/03-commit-workflow-file.png" width="80%"/>
+
 </p>
 </details>
 
@@ -70,15 +75,15 @@ Click `Start Commit` -> `Commit this file` to commit the changes to _main_ branc
 <summary>Workflow triggers</summary>
 <p>
 
-#### Workflow triggers
+### Workflow triggers
 
 There are a [number of events](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) that can trigger a GitHub Actions workflow. In this example, the workflow will be triggered on
 
-<img src="images/04-actions-sample-events.png" width="50%"/>
-
 - push to _main_ branch
 - pull request to merge to _main_ branch
-- on schedule, at 6:33 every Thursday
+- on schedule, at 4:31 every Saturday
+
+<img src="images/04-actions-sample-events.png" width="50%"/>
 
 Setting up the new CodeQL workflow and committing it to _main_ branch in the step above will trigger the scan.
 
@@ -91,7 +96,7 @@ Setting up the new CodeQL workflow and committing it to _main_ branch in the ste
 
 <p>
  
-#### GitHub Actions Progress
+### GitHub Actions Progress
 
 Click `Actions` tab -> `CodeQL`
 
@@ -106,11 +111,14 @@ Click the specific workflow run. You can view the progress of the Workflow run u
 <summary>Security Issues</summary>
 <p>
   
-Once the Workflow has completed, click the `Security` tab -> ` Code Scanning Alerts`. An security alert "Query built from user-controlled sources" should be visible.
+Once the Workflow has completed, click the `Security` tab -> `Code scanning alerts`. You will see 3 alerts titled "Database query built from user-controlled sources".
 
-#### Security Alert View
+<img src="images/06-security-code-scanning-alerts.png" width="80%"/>
 
-Clicking on the security alert will provide details about the security alert including: <br/>
+
+### Security Alert View
+
+Clicking on a security alert will provide details about the security alert including: <br/>
 <ul>
 <li>A description of the issue </li>
 <li>A tag to the CWE that it is connected to as well as the type of alert (Error, Warning, Note)</li>
@@ -119,13 +127,13 @@ Clicking on the security alert will provide details about the security alert inc
 </ul>
 <img src="images/06-security-codeql-alert.png" width="80%"/>
 
-#### Security Alert Description
+### Security Alert Description
 
 Click `Show more` to view a full desciption of the alert including examples and links to additional information.
 
 <img src="images/07-security-codeql-show-more.png" width="80%"/>
 
-#### Security Full Description
+### Security Full Description
 
 <img width="80%" src="images/08-security-codeql-full-desc.png">
 
@@ -136,15 +144,15 @@ Click `Show more` to view a full desciption of the alert including examples and 
 <summary>Show Paths</summary>
 <p>
 
-#### Show Paths Button
+### Show Paths Button
 
 CodeQL Analysis is able to trace the dataflow path from source to sink and gives you the ability to view the path traversal within the alert.
 
-Click `show paths` in order to see the dataflow path that resulted in this alert.
+Click `Show paths` to see the dataflow path that resulted in this alert.
 
 <img src="images/09-security-codeql-show-paths.png" width="80%"/>
 
-#### Show Paths View
+### Show Paths View
 
 <img src="images/10-security-codeql-show-paths-details.png" width="80%"/>
 
@@ -156,41 +164,43 @@ Click `show paths` in order to see the dataflow path that resulted in this alert
   
 <summary>Fix the Security Alert</summary>
 
-In order to fix this specific alert, we will need to ensure parameters used in the SQL query is validated and sanitized.
+CodeQL has created alerts because our database query is using data supplied by users through the API.  A bad actor could inject a SQL statement to the query parameter which would be executed directly against the database.  To fix this, we need to parameterze our database query.
 
-Click on the `Code` tab and [Edit](https://docs.github.com/en/free-pro-team@latest/github/managing-files-in-a-repository/editing-files-in-your-repository) the file [`routes.py`](./server/routes.py) in the `server` folder, replace the content with the file [`fixme`](./fixme).
+Click on the `Code` tab and edit the file [`models/models.go`](./models/models.go).  
 
-<img src="images/11-fix-source-code.png" width="30%"/>
+Within `models.go`, the lines `38`, `57`, and `76` contain the SQL injections.  Remediate those vulnerabilities by following the in-line comments.
+
+<img src="images/11-fix-source-code.png" width="80%"/>
 
 Click `Create a new branch for this commit and start a pull request`, name the branch `fix-sql-injection`, and create the Pull Request.
 
-#### Pull Request Status Check
+### Pull Request Status Check
 
 In the Pull Request, you will notice that the CodeQL Analysis has started as a status check. Wait until it completes.
 
 <img src="images/12-fix-pr-in-progress.png" width="80%"/>
 
-#### Security Alert Details
+### Security Alert Details
 
 After the Workflow has completed click on `Details` by the `Code Scanning Results / CodeQL` status check. 
 
 <img src="images/13-fix-pr-done.png" width="80%"/>
 
-#### Fixed Alert
+### Fixed Alert
 
-Notice that Code Scanning has detected that this Pull Request will fix the SQL injection vulnerability that was detected before.
+Notice that Code Scanning has detected that this Pull Request will fix the SQL injection vulnerabilities which were detected before.
 
 <img src="images/14-fix-detail.png" width="80%"/>
 
 Merge the Pull Request. After the Pull Request has been merged, another Workflow will kick off to scan the repository for any vulnerabilties. 
 
-#### Closed Security Alerts
+### Closed Security Alerts
 
 After the final Workflow has completed, navigate back to the `Security` tab and click `Closed`. Notice that the **Query built from user-controlled sources** security alert now shows up as a closed issue.
 
 <img src="images/15-fixed-alert.png" width="80%"/>
 
-#### Traceability
+### Traceability
 
 Click on the security alert and notice that it details when the fix was made, by whom, and the specific commit. This provides full traceability to detail when and how a security alert was fixed and exactly what was changed to remediate the issue.
 
@@ -198,7 +208,6 @@ Click on the security alert and notice that it details when the fix was made, by
 
 </p>
 </details>
--->
   
 ## Next Steps
 
