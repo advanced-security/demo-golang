@@ -83,7 +83,7 @@ There are a [number of events](https://docs.github.com/en/free-pro-team@latest/a
 - pull request to merge to _main_ branch
 - on schedule, at 4:31 every Saturday
 
-<img src="images/04-actions-sample-events.png" width="50%"/>
+<img src="images/04-actions-sample-events.png" width="80%"/>
 
 Setting up the new CodeQL workflow and committing it to _main_ branch in the step above will trigger the scan.
 
