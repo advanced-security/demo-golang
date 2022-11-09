@@ -35,7 +35,8 @@ func AllBooks() ([]Book, error) {
 // the query, you should be using a parameterized query.
 func NameQuery(r string) ([]Book, error) {
 	// Fix: rows, err := DB.Query("SELECT * FROM books WHERE name = ?", r)
-	rows, err := DB.Query(fmt.Sprintf("SELECT * FROM books WHERE name = '%s'", r))
+	q := "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='?' ORDER BY PRICE"
+	rows, err := DB.Query(q, req.URL.Query()["category"], r))
 	if err != nil {
 		return nil, err
 	}
