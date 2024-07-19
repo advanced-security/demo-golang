@@ -12,6 +12,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+var BadPasswrod = "MySup3rS3cr3tP@ssw0rd"
+
 func main() {
 	var err error
 
