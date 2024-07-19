@@ -12,7 +12,11 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var BadPasswrod = "MySup3rS3cr3tP@ssw0rd"
+var (
+	BadPassword        = "glat"
+	AWSAccessKeyID     = "ASIARMIADSCTWVPA1ORA"
+	AWSSecretAccessKey = "97ca6448a3324b8a6a43424264cb03047d994315"
+)
 
 func main() {
 	var err error
