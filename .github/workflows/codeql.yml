@@ -91,3 +91,17 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+
+  sbom:
+    name: Create SBOM
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: CycloneDX GoMod Generate SBOM
+      uses: CycloneDX/gh-gomod-generate-sbom@v2.0.0
+      with:
+        version: v2
+    - name: Generate SBOM
+      run: cyclonedx-gomod app -assert-licenses -json -licenses -output-version 1.5 -std -output sbom.cdx.json -main . .
