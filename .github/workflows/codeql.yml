@@ -102,6 +102,6 @@ jobs:
     - name: CycloneDX GoMod Generate SBOM
       uses: CycloneDX/gh-gomod-generate-sbom@v2.0.0
       with:
-        version: v2
+        version: v1
     - name: Generate SBOM
       run: cyclonedx-gomod app -assert-licenses -json -licenses -output-version 1.5 -std -output sbom.cdx.json -main . .
