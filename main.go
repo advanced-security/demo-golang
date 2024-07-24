@@ -10,6 +10,7 @@ import (
 	"github.com/octodemo/advanced-security-go/models"
 
 	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/tsuibin/goxmpp2/xmpp"
 )
 
 var (
